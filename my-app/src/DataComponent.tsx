@@ -1,82 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { inputData } from "./Types";
 import InputFields from "./InputFields";
 import "./App.css";
-
-const GET_DATA = gql`
-  query GetData {
-    getData {
-      id
-      fname
-      mail
-      number
-      website
-      contactName
-      contactPhone
-      contactMail
-      notes
-      type
-      category
-      percentage
-      activeFrom
-      criticalAccount
-      paymentOptions
-    }
-  }
-`;
-
-const CREATE_DATA = gql`
-  mutation CreateData($input: DataInput!) {
-    createData(data: $input) {
-      id
-      fname
-      mail
-      number
-      website
-      contactName
-      contactPhone
-      contactMail
-      notes
-      type
-      category
-      percentage
-      activeFrom
-      criticalAccount
-      paymentOptions
-    }
-  }
-`;
-
-const UPDATE_DATA = gql`
-  mutation UpdateData($id: String!, $input: DataInput!) {
-    updateData(id: $id, data: $input) {
-      id
-      fname
-      mail
-      number
-      website
-      contactName
-      contactPhone
-      contactMail
-      notes
-      type
-      category
-      percentage
-      activeFrom
-      criticalAccount
-      paymentOptions
-    }
-  }
-`;
-
-const DELETE_DATA = gql`
-  mutation DeleteData($id: String!) {
-    deleteData(id: $id) {
-      id
-    }
-  }
-`;
+import { CREATE_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "./queries";
 
 const DataComponent: React.FC = () => {
   const [formData, setFormData] = useState<inputData>({
