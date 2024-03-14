@@ -1,0 +1,106 @@
+body {
+  margin: 10px;
+  background-color: #ff6b6b;
+  background-image: linear-gradient(#ff6b6b);
+}
+.buttonDesign {
+  height: auto;
+  width: auto;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #556270;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.outputtablebtn {
+  height: auto;
+  width: auto;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(186, 186, 220);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+input,
+textarea {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.margingap {
+  margin-top: 50px;
+  border: 2px solid black;
+}
+
+thead {
+  background-color: antiquewhite;
+}
+
+tbody {
+  background-color: rgb(202, 202, 207);
+}
+
+textarea {
+  height: 80px;
+  width: 250px;
+}
+
+.table-scroll {
+  margin-top: 20px;
+  border: 2px solid black;
+}
+
+.editButton {
+  height: auto;
+  width: 60px;
+  margin: 3px;
+  background-color: #556270;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.531);
+}
+
+.delButton {
+  height: auto;
+  width: 60px;
+  margin: 3px;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.531);
+}
+
+.delButton:hover,
+.editButton:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: 10ms;
+}
+
+.mandatory {
+  color: red;
+}
+
+.light-font {
+  font-weight: 300;
+}

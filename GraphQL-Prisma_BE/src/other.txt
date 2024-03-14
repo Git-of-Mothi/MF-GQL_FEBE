@@ -1,0 +1,17 @@
+{
+    "id": "b4435ndfdj",
+    "fname": "mothi",
+    "email": "mothi1@gmail.com",
+    "number": "6755567765",
+    "website": "mothi@gtc.com",
+    "contactName": "Hello",
+    "contactPhone": "6755567765",
+    "contactMail": "raj4@gmail.com",
+    "notes": "No notes",
+    "type": "No rules",
+    "category": "Shoes",
+    "percentage": "30",
+    "activeFrom": "20-10-1994",
+    "criticalAccount": "Yes",
+    "paymentOptions": "UPI"
+}

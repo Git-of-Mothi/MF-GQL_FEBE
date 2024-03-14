@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Data {
+  id: ID!
+  fname: String!
+  mail: String!
+  number: String!
+  website: String!
+  contactName: String!
+  contactPhone: String!
+  contactMail: String!
+  notes: String!
+  type: String!
+  category: String!
+  percentage: String!
+  activeFrom: String!
+  criticalAccount: String!
+  paymentOptions: String!
+}
+
+type Query {
+  getData: [Data!]!
+}
+
+type Mutation {
+  createData(data: DataInput!): Data!
+  updateData(id: String!, data: DataInput!): Data!
+  deleteData(id: String!): Data!
+}
+
+input DataInput {
+  fname: String!
+  mail: String!
+  number: String!
+  website: String!
+  contactName: String!
+  contactPhone: String!
+  contactMail: String!
+  notes: String!
+  type: String!
+  category: String!
+  percentage: String!
+  activeFrom: String!
+  criticalAccount: String!
+  paymentOptions: String!
+}
