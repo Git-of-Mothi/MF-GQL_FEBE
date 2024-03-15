@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
 import DataComponent from "./DataComponent";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <DataComponent />
-  </ApolloProvider>,
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <DataComponent />
+    </ApolloProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useCallback } from "react";
 import { inputData } from "./Types";
+import { Link } from "react-router-dom";
 
 interface InputFieldsProps {
   formData: inputData;
@@ -326,9 +327,9 @@ const InputFields: React.FC<InputFieldsProps> = ({
           </button>
           <br />
           <button className="outputtablebtn">
-            {/* <Link style={{ color: "black" }} to="/outputtable"> */}
-            Show Datas
-            {/* </Link> */}
+            <Link style={{ color: "black" }} to="/outputtable">
+              Show Datas
+            </Link>
           </button>
         </table>
       </form>

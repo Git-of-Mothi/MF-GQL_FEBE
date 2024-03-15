@@ -1,68 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_DATA } from "./queries";
+import React from "react";
+import { inputData } from "./Types";
+import { Link } from "react-router-dom";
 
-const OutputTable = () => {
-  const { loading, error, data } = useQuery(GET_DATA);
+interface OutputTableProps {
+  filteredData: inputData[];
+  setEditId: React.Dispatch<React.SetStateAction<string | null>>;
+  handleDelete: (id: string) => Promise<void>;
+}
 
-  // State variables for filters
-  const [filterBusinessType, setFilterBusinessType] = useState<string[]>([]);
-  const [filterPaymentOption, setFilterPaymentOption] = useState<string[]>([]);
-
-  // Effect to fetch data when component mounts or filters change
-  useEffect(() => {
-    // Fetch data here based on filters
-  }, [filterBusinessType, filterPaymentOption]);
-
-  const handleBusinessTypeFilter = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    if (event.target.checked) {
-      setFilterBusinessType([...filterBusinessType, value]);
-    } else {
-      setFilterBusinessType(
-        filterBusinessType.filter((item) => item !== value)
-      );
-    }
-  };
-
-  const handlePaymentOptionFilter = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    if (event.target.checked) {
-      setFilterPaymentOption([...filterPaymentOption, value]);
-    } else {
-      setFilterPaymentOption(
-        filterPaymentOption.filter((item) => item !== value)
-      );
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteData({ variables: { id } });
-      refetch();
-    } catch (error) {
-      console.error("Error deleting data:", error);
-    }
-  };
-
-  const clearFilters = () => {
-    setFilterBusinessType([]);
-    setFilterPaymentOption([]);
-  };
-
-  const filteredData = data?.getData.filter((item: any) => {
-    const matchBusinessType =
-      filterBusinessType.length === 0 || filterBusinessType.includes(item.type);
-    const matchPaymentOption =
-      filterPaymentOption.length === 0 ||
-      filterPaymentOption.includes(item.paymentOptions);
-    return matchBusinessType && matchPaymentOption;
-  });
-
+const OutputTable: React.FC<OutputTableProps> = ({
+  filteredData,
+  setEditId,
+  handleDelete,
+}) => {
   return (
     <div>
       <table className="table-scroll" id="dataTable" style={{ width: "100%" }}>
@@ -108,7 +58,9 @@ const OutputTable = () => {
                     className="editButton"
                     onClick={() => setEditId(item.id)}
                   >
-                    Edit
+                    <Link style={{ color: "white" }} to="/">
+                      Edit
+                    </Link>
                   </button>
                   <br />
                   <button
@@ -123,50 +75,10 @@ const OutputTable = () => {
           ))}
         </tbody>
       </table>
-      <h2>Filter by business type:</h2>
-      <input
-        type="checkbox"
-        value="Small Business"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Small business</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Enterprise"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Enterprise</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Entrepreneur"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Entrepreneur</label>
-      <br />
-
-      <h2>Filter by payment option:</h2>
-      <input
-        type="checkbox"
-        value="Cash on Delivery"
-        onChange={handlePaymentOptionFilter}
-      />
-      <label className="light-font">Cash on delivery</label>
-      <br />
-      <input type="checkbox" value="UPI" onChange={handlePaymentOptionFilter} />
-      <label className="light-font">UPI</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Card payment"
-        onChange={handlePaymentOptionFilter}
-      />
-      <label className="light-font">Card payment</label>
-      <br />
-
-      <button className="buttonDesign" onClick={clearFilters}>
-        Clear all filter(s)
+      <button className="outputtablebtn">
+        <Link style={{ color: "black" }} to="/">
+          Home
+        </Link>
       </button>
     </div>
   );

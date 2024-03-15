@@ -4,6 +4,9 @@ import { inputData } from "./Types";
 import InputFields from "./InputFields";
 import "./App.css";
 import { CREATE_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "./queries";
+import OutputTable from "./OutputTable";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import FilterComponent from "./FilterComponent";
 
 const DataComponent: React.FC = () => {
   const [formData, setFormData] = useState<inputData>({
@@ -32,6 +35,8 @@ const DataComponent: React.FC = () => {
   const [updateData] = useMutation(UPDATE_DATA);
   const [deleteData] = useMutation(DELETE_DATA);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (editId && data?.getData) {
       const editedData = data.getData.find((item: any) => item.id === editId);
@@ -51,6 +56,7 @@ const DataComponent: React.FC = () => {
         },
       });
       console.log("Data created successfully:", responseData);
+      navigate("/outputtable");
       refetch();
     } catch (error) {
       console.error("Error creating data:", error);
@@ -97,6 +103,7 @@ const DataComponent: React.FC = () => {
         },
       });
       console.log("Data updated successfully:", responseData);
+      navigate("/outputtable");
       setEditId(null);
       setFormData({
         fname: "",
@@ -123,6 +130,7 @@ const DataComponent: React.FC = () => {
   const handleDelete = async (id: string) => {
     try {
       await deleteData({ variables: { id } });
+      console.log("Data deleted successfully");
       refetch();
     } catch (error) {
       console.error("Error deleting data:", error);
@@ -175,116 +183,39 @@ const DataComponent: React.FC = () => {
   return (
     <div>
       <h1>Merchant data</h1>
-      <InputFields
-        formData={formData}
-        setFormData={setFormData}
-        handleCreate={handleCreate}
-        handleUpdate={handleUpdate}
-        editId={editId}
-      />
-      <table className="table-scroll" id="dataTable" style={{ width: "100%" }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Website</th>
-            <th>Contact name</th>
-            <th>Contact phone</th>
-            <th>Contact email</th>
-            <th>Notes</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Commission percentage</th>
-            <th>Active From</th>
-            <th>Critical account</th>
-            <th>Payment options</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData?.map((item: any) => (
-            <tr key={item.id}>
-              <td>{item.fname}</td>
-              <td>{item.mail}</td>
-              <td>{item.number}</td>
-              <td>{item.website}</td>
-              <td>{item.contactName}</td>
-              <td>{item.contactPhone}</td>
-              <td>{item.contactMail}</td>
-              <td>{item.notes}</td>
-              <td>{item.type}</td>
-              <td>{item.category}</td>
-              <td>{item.percentage}</td>
-              <td>{item.activeFrom}</td>
-              <td>{item.criticalAccount}</td>
-              <td>{item.paymentOptions}</td>
-              <td>
-                <center>
-                  <button
-                    className="editButton"
-                    onClick={() => setEditId(item.id)}
-                  >
-                    Edit
-                  </button>
-                  <br />
-                  <button
-                    className="delButton"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    Delete
-                  </button>
-                </center>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <h2>Filter by business type:</h2>
-      <input
-        type="checkbox"
-        value="Small Business"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Small business</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Enterprise"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Enterprise</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Entrepreneur"
-        onChange={handleBusinessTypeFilter}
-      />
-      <label className="light-font">Entrepreneur</label>
-      <br />
-
-      <h2>Filter by payment option:</h2>
-      <input
-        type="checkbox"
-        value="Cash on Delivery"
-        onChange={handlePaymentOptionFilter}
-      />
-      <label className="light-font">Cash on delivery</label>
-      <br />
-      <input type="checkbox" value="UPI" onChange={handlePaymentOptionFilter} />
-      <label className="light-font">UPI</label>
-      <br />
-      <input
-        type="checkbox"
-        value="Card payment"
-        onChange={handlePaymentOptionFilter}
-      />
-      <label className="light-font">Card payment</label>
-      <br />
-
-      <button className="buttonDesign" onClick={clearFilters}>
-        Clear all filter(s)
-      </button>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <InputFields
+              formData={formData}
+              setFormData={setFormData}
+              handleCreate={handleCreate}
+              handleUpdate={handleUpdate}
+              editId={editId}
+            />
+          }
+        />
+        <Route
+          path="/outputtable"
+          element={
+            <>
+              <FilterComponent
+                handleBusinessTypeFilter={handleBusinessTypeFilter}
+                filterBusinessType={filterBusinessType}
+                filterPaymentOption={filterPaymentOption}
+                handlePaymentOptionFilter={handlePaymentOptionFilter}
+                clearFilters={clearFilters}
+              />
+              <OutputTable
+                filteredData={filteredData}
+                setEditId={setEditId}
+                handleDelete={handleDelete}
+              />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 };
