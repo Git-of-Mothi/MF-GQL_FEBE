@@ -7,7 +7,8 @@ import { CREATE_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "./queries";
 import OutputTable from "./OutputTable";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
-import Header from "./Header";
+import FormHeader from "./FormHeader";
+import DataHeader from "./DataHeader";
 
 const DataComponent: React.FC = () => {
   const [formData, setFormData] = useState<inputData>({
@@ -183,13 +184,12 @@ const DataComponent: React.FC = () => {
 
   return (
     <div>
-      <h1>Merchant form</h1>
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <Header title="Merchant form" />
+              <FormHeader title="Merchant form" />
               <InputFields
                 formData={formData}
                 setFormData={setFormData}
@@ -211,6 +211,7 @@ const DataComponent: React.FC = () => {
                 handlePaymentOptionFilter={handlePaymentOptionFilter}
                 clearFilters={clearFilters}
               />
+              <DataHeader title="Merchant data" />
               <OutputTable
                 filteredData={filteredData}
                 setEditId={setEditId}
