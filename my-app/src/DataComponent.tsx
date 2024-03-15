@@ -7,6 +7,7 @@ import { CREATE_DATA, DELETE_DATA, GET_DATA, UPDATE_DATA } from "./queries";
 import OutputTable from "./OutputTable";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
+import Header from "./Header";
 
 const DataComponent: React.FC = () => {
   const [formData, setFormData] = useState<inputData>({
@@ -182,18 +183,21 @@ const DataComponent: React.FC = () => {
 
   return (
     <div>
-      <h1>Merchant data</h1>
+      <h1>Merchant form</h1>
       <Routes>
         <Route
           path="/"
           element={
-            <InputFields
-              formData={formData}
-              setFormData={setFormData}
-              handleCreate={handleCreate}
-              handleUpdate={handleUpdate}
-              editId={editId}
-            />
+            <>
+              <Header title="Merchant form" />
+              <InputFields
+                formData={formData}
+                setFormData={setFormData}
+                handleCreate={handleCreate}
+                handleUpdate={handleUpdate}
+                editId={editId}
+              />
+            </>
           }
         />
         <Route
