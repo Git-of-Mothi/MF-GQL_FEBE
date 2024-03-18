@@ -159,12 +159,12 @@ const InputFields: React.FC<InputFieldsProps> = ({
             <b>Notes:</b>
           </label>
           <br />
-          <input
-            type="text"
+          <textarea
             id="notes"
             name="notes"
             value={formData.notes}
             onChange={handleInputChange}
+            rows={4}
           />
           <br />
           <label htmlFor="text" className="type">

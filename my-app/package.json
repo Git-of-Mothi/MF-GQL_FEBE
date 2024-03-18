@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.8.2",
     "@apollo/client": "^3.9.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +12,7 @@
     "@types/node": "^16.18.86",
     "@types/react": "^18.2.63",
     "@types/react-dom": "^18.2.19",
+    "antd": "^5.15.3",
     "axios": "^1.6.7",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
